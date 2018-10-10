@@ -27,7 +27,6 @@
 - La siguiente función devuelve undefined en lugar de la multiplicación, se pide arreglarla.
 
   ~~~javascript
-    // Obtener edad
   function multiply (a, b) {
       a * b
   }
