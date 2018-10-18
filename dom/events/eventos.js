@@ -6,6 +6,9 @@ function haceClick () {
   alert('hiciste click!')
 }
 
+document.getElementById('p-boton')
+  .addEventListener('click', haceClick)
+
 // var estado = 'perrito';
 function onImg () {
   var estaOff = true;
