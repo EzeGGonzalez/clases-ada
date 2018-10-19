@@ -1,24 +1,38 @@
-var boton = document.getElementById('add');
-var input = document.getElementById('text');
 var list = document.getElementById('task-list');
 
-var contador = 0;
+function addTask () {
+  var taskName = document.getElementById('task').value;
+  if (taskName.length > 0) {
+    // <div>
+    //   <span></span>
+    //   <button></button>
+    // </div>
+    var item = document.createElement('li');
+    var text = document.createTextNode(taskName);
 
-function agregarTarea () {
-  var nuevaTarea = document.createElement('div');
-  nuevaTarea.id = 'tarea-' + contador;
+    // creo el button de eliminar
+    var remove = document.createElement('button');
+    remove.innerHTML = 'X';
+    remove.addEventListener('click', function () {
+      list.removeChild(item);
+    });
 
-  nuevaTarea.innerHTML = input.value
-    + '<button onclick="quitarTarea(' + contador + ')">X</button>';
+    // item.innerHTML = taskName;
+    item.appendChild(text);
+    item.appendChild(remove);
+    // <li>el texto <button>X</button></li>
 
-  list.appendChild(nuevaTarea);
+    list.appendChild(item);
 
-  contador++;
+    document.getElementById('task').value = '';
+  }
 }
 
-function quitarTarea (idDelDivAEliminar) {
-  var elDivAEliminar = document.getElementById('tarea-' + idDelDivAEliminar)
-  list.removeChild(elDivAEliminar);
-}
-
-boton.addEventListener('click', agregarTarea);
+document.getElementById('add').addEventListener('click', addTask);
+document
+  .getElementById('task')
+  .addEventListener('keypress', function (e) {
+    if (e.keyCode === 13) {
+      addTask();
+    }
+})
