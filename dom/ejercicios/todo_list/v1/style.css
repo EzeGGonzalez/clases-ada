@@ -1,0 +1,8 @@
+#task-list div {
+  color: blue;
+}
+
+#task-list div button {
+  background-color: red;
+  color: white;
+}

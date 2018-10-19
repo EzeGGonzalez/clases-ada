@@ -8,6 +8,9 @@ var list = document.getElementById('task-list');
 // esta función se ejecuta cuando hago click en el botón 'agregar nota', y agrega un nuevo div al container
 function agregarTarea () {
   // div ejemplo a agregar: <div>Tarea 1 <button>X</button></div>
+  if (input.value === '') {
+    return;
+  }
 
   // creo el nuevo elemento div
   var nuevaTarea = document.createElement('div');
@@ -21,6 +24,9 @@ function agregarTarea () {
 
   // al div de la tarea le agrego el contenido del input, lo que ingresa el usuario
   nuevaTarea.innerHTML = input.value;
+
+  // limpiar el valor que tiene la caja de texto
+  input.value = '';
 
   // al div de la tarea le agrego (append) el button para eliminar la tarea
   nuevaTarea.appendChild(nuevoBoton);
@@ -40,5 +46,12 @@ function quitarTarea (e) {
   list.removeChild(elDivAEliminar);
 }
 
+function agregarTareaEnter (e) {
+  if (e.keyCode === 13) {
+    agregarTarea();
+  }
+}
+
 // al boton 'agregar tarea' le agrego el onclick
 boton.addEventListener('click', agregarTarea);
+input.addEventListener('keydown', agregarTareaEnter);
