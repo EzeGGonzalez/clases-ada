@@ -8,7 +8,7 @@
   * **attribute:** representan los atributos de los nodos / elementos
   * **nodeList:** es un array con nodos. Sus elementos se pueden acceder por medio items o indice del array.
 
-![DOM](https://file-wilmqajjdz.now.sh/)
+![DOM](http://girldevelopit.github.io/gdi-featured-js-intro/dist/img/dom-tree.png)
 
 * Podes leer más sobre `dom` en el [sitio del MDN](https://developer.mozilla.org/es/docs/DOM)
 
@@ -351,8 +351,8 @@ parrafos[1].previousSibling; // De esta forma accedemos al primer párrafo parra
 parrafos[1].nextElementSibling; // De esta forma accedemos al elemento que sigue parrafos[2]
 ```
 
-#### Prácticas
-[Ejercicio 21](../ejercicios/consignas/js-browser/ej21.md)
+#### Ejercicios
+[Ejercicio 8](./ejercicios/008.md)
 
 ### Modificar el contenido de un elemento
 * Los elementos tienen un atributo llamado `innerText` que nos permite leer o escribir contenido en modo de texto
@@ -387,8 +387,8 @@ parrafo.textContent; // ECMAScript en el browser está muy bueno
 * Existe otra forma de establecer o cambiar el contenido de un elemento y se llama `innerHTML`
 * `innerHTML` paresea el texto que se va a asignar al elemento y si encuentra que ese texto tiene formato de HTML intenta crear elementos con ese contenido
 
-#### Prácticas
-[Ejercicio 22](../ejercicios/consignas/js-browser/ej22.md)
+#### Ejercicios
+[Ejercicio 9](./ejercicios/009.md)
 
 **Ejemplo:**
 ```html
@@ -404,8 +404,8 @@ parrafo.innerHTML; // <span>ECMAScript en el browser está muy bueno</span>
 
 * Si bien en el ejemplo puede parecer que sólo modificamos el texto en el browser este código crea un nuevo span con el contenido ECMAScript en el browser está muy bueno y lo asigna dentro del elemento párrafo
 
-#### Prácticas
-[Ejercicio 23](../ejercicios/consignas/js-browser/ej23.md)
+#### Ejercicios
+[Ejercicio 10](./ejercicios/010.md)
 
 ### Manejo de propiedades de CSS
 * Los elementos HTML tienen una propiedad llamada `style` que retorna un `objeto literal` que representa los estilos que tiene un objeto
@@ -426,8 +426,8 @@ elemento.style.fontWeight = ‘bold’; //seteo el weight a bold
 
 * De esta forma podemos manipular las propiedades de `style` en nuestros elementos
 
-#### Prácticas
-[Ejercicio 24](../ejercicios/consignas/js-browser/ej24.md)
+#### Ejercicios
+[Ejercicio 11](./ejercicios/011.md)
 
 ### CRUD elementos
 * CRUD significa:
@@ -465,11 +465,11 @@ div.appendChild(p);
 * En este ejemplo vemos que creamos 2 elementos párrafo y div
 * Al tener la referencia de los dos elementos podemos interactuar con ellos y en este caso estamos insertando el párrafo dentro del div
 
-#### Prácticas
-[Ejercicio 25](../ejercicios/consignas/js-browser/ej25.md)
-[Ejercicio 26](../ejercicios/consignas/js-browser/ej26.md)
-[Ejercicio 27](../ejercicios/consignas/js-browser/ej27.md)
-[Ejercicio 28](../ejercicios/consignas/js-browser/ej28.md)
+#### Ejercicios
+[Ejercicio 12](./ejercicios/012.md)
+[Ejercicio 13](./ejercicios/013.md)
+[Ejercicio 14](./ejercicios/014.md)
+[Ejercicio 15](./ejercicios/015.md)
 
 #### Remover un elemento
 * Los elementos tienen un método llamado `removeChild` que nos permite remover nodos hijos
@@ -501,10 +501,10 @@ var div = document.querySelector('div');
 div.innerHTML = ''; // chau chau contenido
 ```
 
-#### Prácticas
-[Ejercicio 29](../ejercicios/consignas/js-browser/ej29.md)
-[Ejercicio 30](../ejercicios/consignas/js-browser/ej30.md)
-[Ejercicio 31](../ejercicios/consignas/js-browser/ej31.md)
+#### Ejercicios
+[Ejercicio 16](./ejercicios/016.md)
+[Ejercicio 17](./ejercicios/017.md)
+[Ejercicio 18](./ejercicios/018.md)
 
 #### Eventos
 * Manejo de eventos del DOM
@@ -529,8 +529,8 @@ button.onclick = function() {
 }
 ```
 
-#### Prácticas
-[Ejercicio 32](../ejercicios/consignas/js-browser/ej32.md)
+#### Ejercicios
+[Ejercicio 19](./ejercicios/019.md)
 
 * La otra opción es registr un evento con `addEventListener`
 * Este método puede ser aplicado en cualquier objeto, eso incluye window, document y en todos los elementos.
@@ -555,8 +555,8 @@ var button = document.querySelector('button');
 button.addEventListener('click', clickHandler);
 ```
 
-#### Prácticas
-[Ejercicio 33](../ejercicios/consignas/js-browser/ej33.md)
+#### Ejercicios
+[Ejercicio 20](./ejercicios/020.md)
 
 * Para quitar un listener podemos utilizar `removeEventListener`
 * Este método puede ser aplicado en cualquier objeto, eso incluye window, document y en todos los elementos
@@ -575,9 +575,6 @@ button.addEventListener('click', clickHandler);
 button.removeEventListener('click', clickHandler); // este botón no tienen más el menejador de evento
 ```
 
-#### Prácticas
-[Ejercicio 34](../ejercicios/consignas/js-browser/ej34.md)
-
 * Por medio del objeto event podemos conocer más datos sobre el evento o prevenir que se ejecute el comportamiento por defecto de ejecución
 * Para prevenir la ejecución de un evento por defecto utilizamos el método `preventDefault`
 
@@ -589,8 +586,8 @@ hipervinculo.addEventListener('click', function(evento) {
 });
 ```
 
-#### Prácticas
-[Ejercicio 35](../ejercicios/consignas/js-browser/ej35.md)
+#### Ejercicios
+[Ejercicio 21](./ejercicios/021.md)
 
 * Podemos capturar algunos eventos del mouse, entre los más conocidos se encuentran: `click, dblclick, mouseover, mouseout y mousemove`
 * El objeto evento asociado al mouse tiene atributos que nos permite saber la posición donde se encuentra con clientX y clientY
@@ -603,9 +600,6 @@ body.addEventListener('click', function(evento) {
   evento.clientY;
 });
 ```
-
-#### Prácticas
-[Ejercicio 36](../ejercicios/consignas/js-browser/ej36.md)
 
 * También podemos controlar los eventos que se disparan cuando se presionan las teclas por medio de los eventos `keypress, keydown y keyup`
 * El objeto del evento tiene propiedades como `charCode` que nos retorna el número de tecla que fué presionado
@@ -620,9 +614,8 @@ body.addEventListener('keypress', function(evento) {
 });
 ```
 
-#### Prácticas
-[Ejercicio 37](../ejercicios/consignas/js-browser/ej37.md)
-[Ejercicio 38](../ejercicios/consignas/js-browser/ej38.md)
+#### Ejercicios
+[Ejercicio 22](./ejercicios/022.md)
 
 #### Lista de eventos que se pueden utilizar:
 * Existen muchos eventos que podemos utilizar para crear UI interactivas:
@@ -636,14 +629,9 @@ body.addEventListener('keypress', function(evento) {
   * oninput
   * onfocus / onblur
 
-#### Prácticas
-[Ejercicio 39](../ejercicios/consignas/js-browser/ej39.md)
-[Ejercicio 40](../ejercicios/consignas/js-browser/ej40.md)
-
-
-## Práctica extra
-[Ejercicio 41](../ejercicios/consignas/js-browser/ej41.md)
-[Ejercicio 42](../ejercicios/consignas/js-browser/ej42.md)
+#### Ejercicios
+[Ejercicio 23](./ejercicios/023.md)
+[Ejercicio 24](./ejercicios/024.md)
 
 #### Formularios
 * Los formularios en HTML son una manera muy buena de obtener datos por parte del usuario.
@@ -695,8 +683,8 @@ console.log(form.method); // application/x-www-form-urlencoded
 console.log(form.name); // login
 ```
 
-#### Prácticas
-[Ejercicio 43](../ejercicios/consignas/js-browser/ej43.md)
+#### Ejercicios
+[Ejercicio 25](./ejercicios/025.md)
 
 * Los elementos del formulario tienen un atributo llamado `value` que nos permite establecer u obtener el valor de un elemento
 * Con la propiedad value podemos obtener el valor de varios de los elementos de un formulario como por ejemplo:
@@ -721,8 +709,8 @@ username.value; // Obtenemos un string vacío
 username.value = 'pepe'; // Establecemos el valor del input username en pepe
 ```
 
-#### Prácticas
-[Ejercicio 44](../ejercicios/consignas/js-browser/ej44.md)
+#### Ejercicios
+[Ejercicio 26](./ejercicios/026.md)
 
 * Por medio del evento `submit` del formulario podemos mandar los datos a otro documento
 * Podemos cortar la ejecución del `submit` de un formulario retornando un valor `false`
@@ -763,8 +751,8 @@ form.onsubmit = function(evento) {
 }
 ```
 
-#### Prácticas
-[Ejercicio 45](../ejercicios/consignas/js-browser/ej45.md)
+#### Ejercicios
+[Ejercicio 27](./ejercicios/027.md)
 
 * Para poder obtener el valor de un elemento `select` podemos utilizar la propiedad `selectedIndex`
 * Esta propiedad retorna el índice numérico de la opción seleccionada
@@ -792,8 +780,8 @@ Select.options[indice]; // retorna el option seleccionado
 console.log(select.options[indice].value); // retorna el valor del elemento seleccionado.
 ```
 
-#### Prácticas
-[Ejercicio 46](../ejercicios/consignas/js-browser/ej46.md)
+#### Ejercicios
+[Ejercicio 28](./ejercicios/028.md)
 
 * Los elementos `checkbox` tienen la propiedad `value` que nos retorna su valor como ya vimos
 * Podemos establecer si un `checkbox` está seleccionado o no utilizando la propiedad `checked`
@@ -838,8 +826,8 @@ sexo.checked = false; // establece un nuevo valor al elemento.
 console.log(sexo.value); // f
 ```
 
-#### Prácticas
-[Ejercicio 47](../ejercicios/consignas/js-browser/ej47.md)
+#### Ejercicios
+[Ejercicio 29](./ejercicios/029.md)
 
 * Los elementos del formulario pueden manejar eventos por medio de los métodos: onfocus, onblur, onchange, oninput
 * También se pueden escribir utilizando el método addEventListener(callback)
@@ -899,8 +887,8 @@ select.onchange = function() {
 }
 ```
 
-#### Prácticas
-[Ejercicio 48](../ejercicios/consignas/js-browser/ej48.md)
+#### Ejercicios
+[Ejercicio 30](./ejercicios/030.md)
 
 * Para validar si un campo de texto está vacio podemos combinar la propiedad `value` y la propiedad `length` de los strings
 
@@ -928,5 +916,5 @@ form.onsubmit = function(evento) {
 }
 ```
 
-#### Prácticas
-[Ejercicio 49](../ejercicios/consignas/js-browser/ej49.md)
+#### Ejercicios
+[Ejercicio 31](./ejercicios/031.md)
