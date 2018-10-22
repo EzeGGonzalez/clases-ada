@@ -1,4 +1,4 @@
-# DOM - 4
+# DOM - 5
 
 * Crear un documento index.html, con el siguiente contenido
   ```html

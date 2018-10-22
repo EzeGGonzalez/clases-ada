@@ -18,6 +18,7 @@
   ```
   * Crear el documento index.js
   * Seleccionar el elemento `<ul>` con ID `lineas`
-  * Crear 5 elementos `<li>`
-  * El contenido de cada `<li>` tiene que ser el texto `linea nro {posicion de la linea}`
-  * Agregar todos los elementos `<li>` al elemento padre `<ul>`
+  * Al hacer click en el botón agregar:
+    * Crear 5 elementos `<li>`
+    * El contenido de cada `<li>` tiene que ser el texto `linea nro {posicion de la linea}`
+    * Agregar todos los elementos `<li>` al elemento padre `<ul>`
