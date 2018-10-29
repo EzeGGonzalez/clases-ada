@@ -306,29 +306,31 @@ console.log('eliminé la peli más larga', misPeliculas.pop());
 // *****************************
 
 // como las variables peli3 y peli5 las tengo, pero no se donde estan, puedo ir a buscar su posicion con indexOf()
-// var posicionPeli3 = misPeliculas.indexOf(peli3);
-// var posicionPeli5 = misPeliculas.indexOf(peli5);
-// // una vez que tengo las posiciones de ambas pelis, las puedo eliminar con splice()
-// if (posicionPeli3 >= 0) misPeliculas.splice(posicionPeli3, 1);
-// if (posicionPeli5 >= 0) misPeliculas.splice(posicionPeli5, 1);
+// una vez que tengo las posiciones de ambas pelis, las puedo eliminar con splice()
+var posicionPeli3 = misPeliculas.indexOf(peli3);
+if (posicionPeli3 >= 0) misPeliculas.splice(posicionPeli3, 1);
+
+// como las variables peli3 y peli5 las tengo, pero no se donde estan, puedo ir a buscar su posicion con indexOf()
+var posicionPeli5 = misPeliculas.indexOf(peli5);
+if (posicionPeli5 >= 0) misPeliculas.splice(posicionPeli5, 1);
 
 // 8.bis Eliminar `peli3` y `peli5`
 // Si no tuviera las variables peli3 y peli5 para hacer un indexOf(),
 // la unica forma para ir a buscarlas es primero hacer un find()
-var peli3 = misPeliculas.find(p => p.id === 3); // tambien puedo buscar por otra propiedad, por ejemplo: misPeliculas.find(p => p.titulo === 'aladin');
-var peli5 = misPeliculas.find(p => p.id === 5); // tambien puedo buscar por otra propiedad, por ejemplo: misPeliculas.find(p => p.titulo === 'aladin y el rey de los ladrones');
-if (peli3 != null) {
-  var posicionPeli3 = misPeliculas.indexOf(peli3);
-  if (posicionPeli3 >= 0) {
-    misPeliculas.splice(posicionPeli3, 1);
-  }
-}
+// var peli3 = misPeliculas.find(p => p.id === 3); // tambien puedo buscar por otra propiedad, por ejemplo: misPeliculas.find(p => p.titulo === 'aladin');
+// var peli5 = misPeliculas.find(p => p.id === 5); // tambien puedo buscar por otra propiedad, por ejemplo: misPeliculas.find(p => p.titulo === 'aladin y el rey de los ladrones');
+// if (peli3 != null) {
+//   var posicionPeli3 = misPeliculas.indexOf(peli3);
+//   if (posicionPeli3 >= 0) {
+//     misPeliculas.splice(posicionPeli3, 1);
+//   }
+// }
 
-if (peli5 != null) {
-  var posicionPeli5 = misPeliculas.indexOf(peli5);
-  if (posicionPeli5 >= 0) {
-    misPeliculas.splice(posicionPeli5, 1);
-  }
-}
+// if (peli5 != null) {
+//   var posicionPeli5 = misPeliculas.indexOf(peli5);
+//   if (posicionPeli5 >= 0) {
+//     misPeliculas.splice(posicionPeli5, 1);
+//   }
+// }
 
 // pobre aladdin, tiene la peor pelicula y encima eliminamos las otras dos que mas o menos zafaban
