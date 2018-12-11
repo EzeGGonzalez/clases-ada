@@ -1,0 +1,41 @@
+header {
+  margin: auto;
+  text-align: center;
+}
+
+.btn {
+  border: none;
+  background: #3a7999;
+  color: #f2f2f2;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  position: relative;
+  box-sizing: border-box;
+  margin-left: 10px;
+}
+
+.infoUser {
+  padding-top: 5px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  background: rgba(21, 146, 146, 0.432);
+  border-collapse: collapse;
+}
+.infoUser tr th, .infoUser td {
+  border: solid black 2px;
+}
+.infoUser a {
+  text-decoration: none;
+  color: #f2f2f2;
+}
+
+input {
+  width: 100px;
+}
+
+/*# sourceMappingURL=style.css.map */
