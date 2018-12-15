@@ -1,0 +1,28 @@
+#contenedor-principal {
+  display: none;
+}
+
+.error {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul li {
+  display: inline;
+}
+
+ul li button {
+  width: 30px;
+}
+
+.cartelito-espera {
+  color: green;
+  font-size: 28px;
+}
+
+#nuevo-producto {
+  display: none;
+}

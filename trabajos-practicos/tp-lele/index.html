@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form id="form-user">
+    <label for="name">Ingresá tu nombre</label>
+    <input type="text" id="name" name="name" class="input-field">
+    <small class="error">este campo es obligatorio!!!</small>
+
+    <button type="button">Ingresar</button>
+  </form>
+
+  <div id="contenedor-principal">
+    <h2>Botonera</h2>
+
+    <ul class="opciones">
+      <li><button onclick="boton(1)">1</button></li>
+      <li><button onclick="boton(2)">2</button></li>
+      <li><button onclick="boton(3)">3</button></li>
+      <li><button onclick="boton(4)">4</button></li>
+      <li><button onclick="boton(5)">5</button></li>
+    </ul>
+
+    <form id="nuevo-producto">
+      <input type="text" name="nombre" id="nombre-producto">
+      <input type="number" name="precio" id="precio-producto">
+
+      <button onclick="agregarProducto()" type="button">Agregar producto</button>
+    </form>
+
+    <!-- ordered list -->
+    <ol id="lista-productos">
+    </ol>
+
+    <p id="subtotal"></p>
+
+    <select name="mp" id="mp">
+      <option value="credito">credito</option>
+      <option value="debito">debito</option>
+      <option value="cheque">cheque</option>
+      <option value="efectivo">efectivo</option>
+    </select>
+
+    <select name="cuotas" id="cuotas">
+      <option value="1">1</option>
+      <option value="12">12</option>
+      <option value="24">24</option>
+      <option value="36">36</option>
+    </select>
+
+    <button id="total">Mostrar total!</button>
+
+    <h1 id="gran-total"></h1>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script src="index.js"></script>
+
+</body>
+</html>
