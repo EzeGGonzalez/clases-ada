@@ -1,0 +1,16 @@
+{
+  "name": "ejemplo-tp",
+  "version": "1.0.0",
+  "description": "esto es un proyecto ejemplo de express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
