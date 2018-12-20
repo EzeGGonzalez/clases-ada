@@ -7,7 +7,16 @@ const router = express.Router();
 // RUTA para obtener el array de todos los todos guardados en el archivos todos.json
 router.get('/todos', function(req, res, next) {
   // leo el archivo todos.json y lo parseo para obtener el array
-  const todos = JSON.parse( fs.readFileSync('todos.json') );
+  let todos = JSON.parse( fs.readFileSync('todos.json') );
+  const search = req.query.search;
+
+  // solo filtro si el parametro tiene algo
+  if (search && search.length > 0) {
+    todos = todos.filter(function (todo) {
+      return todo.text.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+    })
+  }
+
   // le respondo al usuario con ese array
   res.json(todos);
 });
