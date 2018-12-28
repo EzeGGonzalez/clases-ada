@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nuev Pelicula</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+</head>
+<body>
+  <h2>Nueva Pelicula</h2>
+
+  <form id="new-movie">
+    <label for="title">Titulo</label>
+    <input type="text" id="title" name="title">
+
+    <label for="summary">Descripción</label>
+    <textarea id="summary" name="summary"></textarea>
+
+    <label for="year">Año</label>
+    <input type="number" id="year" name="year">
+
+    <!-- importante el type="button" -->
+    <button type="button">Guardar</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="nuevo.js"></script>
+</body>
+</html>
