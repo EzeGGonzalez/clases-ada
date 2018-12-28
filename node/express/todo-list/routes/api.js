@@ -7,17 +7,34 @@ const router = express.Router();
 // RUTA para obtener el array de todos los todos guardados en el archivos todos.json
 router.get('/todos', function(req, res, next) {
   // leo el archivo todos.json y lo parseo para obtener el array
-  let todos = JSON.parse( fs.readFileSync('todos.json') );
+  let contenidoDelArchivo = fs.readFileSync('todos.json');
+  let todos = JSON.parse( contenidoDelArchivo );
+
+  // obtenemos el query param search
+  // localhost:3000/api/todos?search=saraza
   const search = req.query.search;
 
-  // solo filtro si el parametro tiene algo
   if (search && search.length > 0) {
-    todos = todos.filter(function (todo) {
-      return todo.text.toLowerCase().indexOf(search.toLowerCase()) >= 0;
-    })
+    // let todosFiltrados = [];
+    // // aca filtramos los todos
+    // for (var i = 0; i < todos.length; i++) {
+    //   if (todos[i].text.indexOf(search) >= 0) {
+    //     todosFiltrados.push(todos[i])
+    //   }
+    // }
+    // res.json(todosFiltrados);
+    // return;
+
+    let todosFiltrados = todos.filter(function (todo) {
+      return todo.text.indexOf(search) >= 0;
+    });
+
+    res.json(todosFiltrados);
+    return;
   }
 
   // le respondo al usuario con ese array
+  // can't send headers after ...
   res.json(todos);
 });
 
@@ -74,24 +91,17 @@ router.post('/todos', function(req, res, next) {
 
 // RUTA para editar un todo
 router.put('/todos/:id', function(req, res, next) {
-  // leo el archivo todos.json y lo parseo para obtener el array
-  const todos = JSON.parse( fs.readFileSync('todos.json') );
-  // voy a buscar el todo especifico que quiero editar
-  const todo = todos.find(t => t.id === req.params.id)
-  // si el todo no existe, respondo con un 404
-  if (!todo) {
-    return res.status(404).end('el todo que queres editar, no existe!');
-  }
-  // si los datos que me llegaron no estan bien, respondo con un 400 y un mensaje avisando que esta mal el objeto
-  if (!esValido(req.body)) {
-    return res.status(400).end('el todo que queres agregar, es incorrecto');
-  }
-  // solo modifico las propiedades que quiero y puedo modificar (en este caso, solo .text)
-  todo.text = req.body.text || todo.text;
-  // como modifique el objeto, vuelvo a grabarlo en el archivo
+  const todos = JSON.parse(fs.readFileSync('todos.json'));
+  // buscar el objeto (el ToDo) que tenemos que editar
+  const id = req.params.id;
+  const elTodoAEditar = todos.find(todo => todo.id === id)
+  // editamos o pisamos o asignamos las propiedades que estamos guardando
+  // req.body es lo que me mandó la web (con jquery es lo que ponemos en el data)
+  elTodoAEditar.text = req.body.text;
+  // guardo los datos en el archivo
   fs.writeFileSync('todos.json', JSON.stringify(todos));
-  // finalmente respondo con el array de todos modificado
-  res.json(todos);
+  // respondemos algo al usuario
+  res.send("ok");
 });
 
 // RUTA para eliminar un todo
