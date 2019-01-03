@@ -295,7 +295,7 @@ module.exports = calcularPrecio
     * Para poder crear una instancia de servidor utilizamos el método `createServer`
     * Este método acepta como parámetro una función para manejar los pedidos (request) y respuestas(response) al server
     * Es decir que le vamos a pasar al método `createServer` un callback que se ejecuta en cada request/response
-    * Por medio de la función `requestHandler` obtenemos los parámetros `request` para saber datos sobre el pedido y `request` para poder manejar la respuesta
+    * Por medio de la función `requestHandler` obtenemos los parámetros `request` para saber datos sobre el pedido y `response` para poder manejar la respuesta
     * La función `requestHandler` se va a ejecutar en cada pedido que le hagamos al server
     * `response.end` envía la respuesta `'Hola mundo desde un servidor de Node.js!'` al cliente que realizó el llamado HTTP
     * Lo único que nos queda por hacer es decirle al servidor que queremos que `escuche (listen)` en un determinado puerto por si llega algún pedido y que meneje la respuesta
