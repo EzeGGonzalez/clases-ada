@@ -305,23 +305,24 @@ module.exports = calcularPrecio
     * El segundo es un callback que se va a ejecutar al terminar de levantar el servidor
     * Este método le pasa al callback un parámetro con la descripción de error en caso de que exista uno (por ejemplo si ya hay algún programa corriendo en el puerto indicado)
 
-    * Corremos en la consola el siguiente comando
+7. Corremos en la consola el siguiente comando
 
-      ```bash
-      npm start
-      ```
+    ```bash
+    npm start
+    ```
 
-    * Si todo está bien vemos un mensaje de que el servidor está corriendo en el puerto 3000
+8. Si todo está bien vemos un mensaje de que el servidor está corriendo en el puerto 3000
 
-      ```bash
-      server is listening on 3000
-      ```
+    ```bash
+    server is listening on 3000
+    ```
 
-    * Abrimos el browser y navegamos a la siguiente dirección: localhost:3000
-    * Vemos el mensaje `Hola mundo desde un servidor de Node.js!` en pantalla
+9. Abrimos el browser y navegamos a la siguiente dirección: localhost:3000
+10. Vemos el mensaje `Hola mundo desde un servidor de Node.js!` en pantalla
+
     * Podemos ver que utilizamos localhost ya que el servidor esta corriendo en nuestro ambiente
     * Utiliza el puerto 3000 ya que nosotros se lo indicamos
-    * Si cortamos la ejecución del programa server.js se baja el servidor y ya no vamos a ver la respuesta en localhost:3000
+    * Si cortamos la ejecución del programa index.js se baja el servidor y ya no vamos a ver la respuesta en localhost:3000
     * El módulo HTTP es de muy bajo nivel y por ende es complejo de utilizar para una aplicación real
     * Es por esto que existen diferentes módulos que corren sobre HTTP para crear proyectos de manera más fácil
     * Los módulos más conocidos son:
@@ -331,7 +332,7 @@ module.exports = calcularPrecio
       * [Restify](http://restify.com/)
     * En esta sección del curso vamos a utilizar Express ya que es el más conocidoy base de todos
 
-## Express
+### Express
 * Express es un framework web que nos permite hacer las siguientes tareas:
   * Nos permite manejar cualquier tipo de pedido HTTP (hasta ahora solo usamos GET)
   * Podemos crear rutas específicas
@@ -364,8 +365,8 @@ module.exports = calcularPrecio
 const express = require('express');
 const app = express();
 
-app.get('/', function(request, response) {
-  response.send('Hello World!');
+app.get('/', function(req, res) {
+  response.send('Hola mundo desde un servidor con Express!');
 });
 
 app.listen(3000, function() {
@@ -374,7 +375,7 @@ app.listen(3000, function() {
 ```
 
 * En este ejemplo vemos como crear un server con Express
-* Requerimos el módulo Express que nos exporta una función y la asignamos a una variable
+* Importamos el módulo Express que nos exporta una función y la asignamos a una variable
 * Por medio de la función express() creamos una nueva instancia de nuestro servidor
 * Con el método `get` configuramos una ruta en la raíz de nuestro sitio `/`
 * Utilizamos el método listen para configurar el puerto donde queremos levantar el server y un callback que se ejecuta al terminar de levantar el servidro
@@ -382,11 +383,11 @@ app.listen(3000, function() {
 
 ### Crear rutas - GET
 * Con Express podemos crear rutas de forma muy fácil
-* Utilizamos el método `get` para obtener requests por `GET`
+* Utilizamos el método `get` para obtener requests por `HTTP GET`
 * Este método recibe un string como primer parámetro especificando la ruta que queremos manejar (Ejemplo la raíz de nuestro sitio '/')
 * Como segundo parámetro le pasamos un callback con la función que tiene que ejecutar cuando se llame a la ruta configurada
-* Este callback recibe los objetos `request` y `response` como parámetro
-* El objeto `response` tiene un método `send` para enviar una respuesta
+* Este callback recibe los objetos `req` y `res` como parámetro
+* El objeto `res` tiene un método `send` para enviar una respuesta
 
 **Ejemplo:**
 ```js
@@ -400,25 +401,15 @@ app.get('/', function(req, res) {
 **Ejemplo:**
 ```js
 app.post('/', function(req, res) {
-  res.send('Utilizamos el método post para manejar un request por POST');
+  res.send('Utilizamos el método post para manejar un request por HTTP POST');
 });
 
 app.put('/', function(req, res) {
-  res.send('Utilizamos el método put para manejar un request por PUT');
+  res.send('Utilizamos el método put para manejar un request por HTTP PUT');
 });
 
 app.delete('/', function(req, res) {
-  res.send('Utilizamos el método delete para manejar un request por DELETE');
-});
-```
-
-* También nos provee un método `all` para manejar todos los verbos juntos
-* Este método es muy útil para configurar `middleware` para todos los tipos de requests
-
-**Ejemplo:**
-```js
-app.all('/', function(req, res) {
-  res.send('Utilizamos el método all para manejar todos los tipos de requests');
+  res.send('Utilizamos el método delete para manejar un request por HTTP DELETE');
 });
 ```
 
@@ -434,11 +425,11 @@ app.post('/productos', function(req, res) {
   res.send('Creamos un Producto');
 });
 
-app.put('/productos', function(req, res) {
+app.put('/productos/:id', function(req, res) {
   res.send('Actualizamos un Producto');
 });
 
-app.delete('/productos', function(req, res) {
+app.delete('/productos/:id', function(req, res) {
   res.send('Borramos un Producto');
 });
 ```
@@ -448,15 +439,15 @@ app.delete('/productos', function(req, res) {
 * Configuramos la url que queremos utilizar
 * Usamos el botón de send para hacer un `request`
 * Vemos la respuesta en la parte inferior
-![Postman](../assets/node/postman1.png)
+![Postman](https://github.com/nisnardi/comunidad-it-js/raw/master/assets/node/postman1.png)
 
 * Postman también nos da información sobre el status de nuestro `request` (ejemplo: 200)
 * Podemos ver los encabezados enviados y recibidos
 * También podemos realizar distintos tipos de llamados como pueden ser POST, PUT, DELETE, etc
-![Postman](../assets/node/postman2.png)
+![Postman](https://github.com/nisnardi/comunidad-it-js/raw/master/assets/node/postman2.png)
 
 ### Manejar la respuesta
-* Por medio del objeto `response` podemos acceder a distintos métodos para enviar una respuesta al cliente
+* Por medio del objeto `res` podemos acceder a distintos métodos para enviar una respuesta al cliente
 * Podemos configurar desde retornar un JSON para un llamado de API hasta enviar un documento HTML estático o dinámico
 * En el [sitio de Express](https://expressjs.com/en/guide/routing.html#response-methods) podemos ver todos los tipos de respuesta que podemos utilizar
 
@@ -468,7 +459,7 @@ app.delete('/productos', function(req, res) {
 **Ejemplo:**
 ```js
 app.get('/', function(req, res) {
-  res.json({ nombre: 'Marta', edad: '40'});
+  res.json({ nombre: 'Ada', edad: '40'});
 });
 ```
 
@@ -495,6 +486,7 @@ app.listen(3000, function() {
 * Usamos el módulo `path` de node para crear la ruta
 * Existe una variable especial `__dirname` que nos permite obtener la ruta absoluta al directorio donde se esta ejecutando un script
 * Por medio del método `join` podemos concatener la ruta del directorio (`__dirname`) y el nombre de nuestro archivo HTML
+* El código del ejemplo se encuentra en `./ejemplos/07-express-sendfile`
 
 ### Router
 * Por medio del concepto de `router` podemos configurar nuestras rutas de mejor forma
@@ -502,7 +494,7 @@ app.listen(3000, function() {
 
 **Router de nuestra Home**
 ```js
-// archivo home.js
+// archivo routes/index.js
 var express = require('express');
 var router = express.Router();
 
@@ -519,16 +511,18 @@ module.exports = router;
 
 **Montamos el router**
 ```js
+// archivo index.js
 const express = require('express')
 const app = express()
-var wiki = require('./home.js');
+const indexRouter = require('./routes/index')
 
-app.use('/', wiki);
+app.use('/', indexRouter)
 ```
 
 * En este ejemplo vemos que podemos utilizar el concepto de `Router` para crear nuevas rutas de nuestro sitio
 * En un módulo creado por nosotros podemos agrupar todas las rutas que queremos según nuestro criterio
 * Luego importamos los distintos módulos de ruta que armamos y los montamos en la dirección que queremos
+* El código del ejemplo se encuentra en `./ejemplos/08-express-router`
 
 ### Manejo de status y errores
 * El objeto response tiene el método status que nos permite establecer el código de HTTP que queremos mandar como respuesta
@@ -616,6 +610,7 @@ app.listen(3000);
 * Podemos establecer que se use para todos los llamados como en el ejemplo de `app.use(miMiddleware)`
 * También lo podemos configurar para que se aplique tan solo en una ruta como vemos en el ejemplo `app.get('/', miMiddleware)`
 * Y hasta lo podemos configurar para usarlo tan solo en una ruta y en un sólo verbo de HTTP como es el caso de `app.get('/', miMiddleware)`
+* El código del ejemplo está en `./ejemplos/09-express-middleware`
 * También podemos configurar y utilizar un middleware desde un módulo de la siguiente forma
 
 **Ejemplo:**
@@ -685,653 +680,329 @@ app.use(express.static('otracarpeta'));
 ```
 
 * En este caso Express intenta primero buscar en la carpeta `public` y luego en la `otracarpeta`
+* El código del ejemplo se encuentra en `./ejemplos/10-express-static-files`
 
-### Usar templates
-* Otro de los beneficios que tiene utilizar Express es que nos permite configurar un engine de template para crear nuestros documentos estáticos
-* Existen diferentes motores de template que podemos configurar
-* Vamos a utilizar y configurar [Handlebars](http://handlebarsjs.com/) como motor de template
-* Para saber más sobre este template engine pueden ingresar a su sitio
-* Dado qeu Handlebars es un poco complicado para configurar vamos a utilizar un módulo que nos facilita su uso
-* Instalamos [express-handlebars]()
+## Crear una API rest
+* Es una forma de describir la forma en que los programas o los sitios webs intercambian datos.
+* El formato de intercambio de datos normalmente es JSON.
+* Necesitamos APIs para:
+    * Ofrecer datos a aplicaciones que se ejecutan en un celular
+    * Ofrecer datos a nuestra propia web/aplicación
+    * Consumir datos de otras aplicaciones o sitios Web
+* Con Node / Express vamos a poder crear nuestra propia API
 
-```bash
-npm install express-handlebars --save
-```
+Imaginemos que tenemos que desarrollar una aplicación web de un videoclub.
+La página web, la interfaz que va a ver el usuario, la vamos a desarrollar con HTML y CSS para que se vea bien, y con Javascript vamos a poder agregarle animaciones e interacción.
 
-* Luego de instalar el módulo de `express-handlebars` tenemos que crear la siguiente arquitectura de carpetas
+Ahora, necesitamos que los datos de las películas estén guardados en algún lugar central. Cada vez que entremos a nuestra web, sin importar desde que dispositivo y en que momento, queremos ver todo lo que tenemos, y que eso se guarde históricamente.
 
-**Estructura de directorios:**
-```
-.
-├── index.js
-└── views
-    ├── home.handlebars
-    └── layouts
-        └── main.handlebars
-```
+Esos datos van a ser almacenados en el **servidor**, y para que podamos verlos/crearlos/eliminarlos desde la web, vamos a implementar nuestra API. En este contexto, la API (que van a ser rutas creadas en express) son un acceso que damos a los datos que guardamos en el servidor. Y vamos a poder _consumir_ nuestra API mediante requests con ajax.
 
-* En la carpeta views vamos a poner todos nuestros templates
-* La carpeta layouts guarda los archivos que van a funcionar como marco general de nuestros templates
+* Vamos a crear dos carpetas: **cliente** y **servidor**
+* Dentro de la carpeta **cliente** vamos a tener todo el código de la página web (html, css y js). Acá simplemente vamos a _consumir_ nuestra API para mostrarle los datos a un usuario, o darle la posibilidad de eliminar / modificar / agregar. La web es simplemente la interfaz con la cual le permito a alguien poder usar los datos que guardamos en el servidor.
+* En la carpeta **servidor** vamos a tener un proyecto de Node.js, donde vamos a poner todo el código necesario para gestionar los datos que estamos guardando. En algún lugar vamos a guardar los datos, y vamos a crear las rutas necesarios (los puntos de entrada) para que alguien desde afuera (desde la web) pueda pedirnos esos datos, o que creemos / eliminemos / editemos otros.
 
-**main.handlebars**
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Example App</title>
-</head>
-<body>
-    {{{body}}}
-</body>
-</html>
-```
+1. Lo primero que hacemos, es crear una carpeta para nuestro proyecto que se llame `11-express-api`
+2. Dentro de esa carpeta, creamos dos nuevas carpetas: `cliente` y `servidor`
+3. Entrando a la carpeta servidor, inicializamos un nuevo proyecto de Node.js con `npm init` e instalamos el módulo express con `npm install express --save` y el módulo cors con `npm install cors --save`
+4. Creamos un archivo llamado `index.js`, una carpeta llamada `routes` y dentro de esa carpeta un archivo llamado `api.js`.
+5. La estructura final, por ahora, quedaría así:
+    ```
+    .
+    ├── cliente
+    |   ├── index.html
+    |   ├── style.css
+    |   └── index.js
+    |
+    └── servidor
+        ├── node_modules
+        ├── .gitignore
+        ├── package.json
+        ├── index.js
+        └── routes
+            └── api.js
+    ```
+5. Una vez realizado eso, empezamos con el código:
 
-**home.handlebars**
-```html
-<h1>Home</h1>
-<p>Sitio generado utilizando templates de <a href="http://handlebarsjs.com/">Handlebars</a></p>
-```
-
-**index.js**
+**servidor/index.js**
 ```js
 const express = require('express')
-const exphbs  = require('express-handlebars')
 const app = express()
+const cors = require('cors')
+const apiRouter = require('./routes/api')
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}))
-app.set('view engine', 'handlebars')
+app.use(cors())
 
-app.get('/', function (req, res) {
-    res.render('home')
-})
+app.use('/', apiRouter);
 
-app.listen(3000)
-```
-
-* En este ejemplo creamos 2 partes del template:
-  * main.handlebars: es el layout general de nuestro sitio. En este documento podemos poner todo lo que queremos que tengan en común todos los documentos. Es como el marco de nuestro sitio. Evita que tengamos que repetir toda la estructura en cada archivo
-  * home.handlebars: En este documento ponemos el contenido específico para una sección, en este ejemplo es el Home de nuestro sitio
-* Por otro lado tenemos una archivo **index.js** que contiene nuestro servidor Express
-* `app.engine('handlebars', exphbs({defaultLayout: 'main'}))` configura que usamos un layout con handlebars
-* `app.set('view engine', 'handlebars')` establece que queremos usar handlebars como motor de nuestros templates
-* Finalmente tenemos un manejador de ruta para la home de nuestro sitio `/` y utilizamos el método `render` de Express para renderizar el template
-* Es en este momento donde se compila el layout y el contenido del sitio para crear un archivo HTML que estamos mandando como respuesta en el método `render`
-* Podes leer más sobre el método [render en el sitio de Express](http://expressjs.com/es/api.html#app.render)
-
-### Armar un sitio
-* Si hacemos todos los pasos hasta acá podemos tener configurado un sitio inicial
-* Vamos a crear algunas secciones para armar un sitio usando templates
-* Agregamos los nuevos archivos que vamos a necesitar
-
-```
-.
-├── index.js
-└── views
-    ├── home.handlebars
-    ├── contact.handlebars
-    ├── products.handlebars
-    └── layouts
-        └── main.handlebars
-```
-
-* Agregamos el contenido a cada archivo:
-
-**main.handlebars**
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Mi primer app con templates</title>
-  <link rel="stylesheet" href="/css/styles.css">
-  <script src="/js/script.js"></script>
-</head>
-<body>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">
-            <img src="/img/logo.svg" alt="apple">
-          </a>
-        </li>
-        <li>
-          <a href="/products">Products</a>
-        </li>
-        <li>
-          <a href="/contact">Contact</a>
-        </li>
-      </ul>
-    </nav>
-    <section>
-      {{{body}}}
-    </section>
-    <footer>
-      <div>Copyright © 2017 Apple Inc. All rights reserved.</div>
-    </footer>
-</body>
-</html>
-```
-
-**home.handlebars**
-```html
-<h1>Apple</h1>
-<p>Bienvenido al sitio de apple.com!!</p>
-```
-
-**products.handlebars**
-```html
-<h1>Apple - Products</h1>
-<p>Listado de productos</p>
-
-<h2>MacBook</h2>
-<ul>
-  <li>MacBook</li>
-  <li>MacBook Air</li>
-  <li>MacBook Pro</li>
-  <li>iMac</li>
-  <li>iMac Pro</li>
-  <li>Mac Pro</li>
-  <li>Mac mini</li>
-  <li>Accessories</li>
-  <li>High Sierra</li>
-</ul>
-
-<h2>iPad</h2>
-<ul>
-  <li>iPad Pro</li>
-  <li>iPad</li>
-  <li>iPad mini 4</li>
-  <li>iOS 11</li>
-  <li>Accessories</li>
-</ul>
-
-<h2>Iphone</h2>
-<ul>
-  <li>iPhone X</li>
-  <li>iPhone 8</li>
-  <li>iPhone 7</li>
-  <li>iPhone 6s</li>
-  <li>iPhone SE</li>
-  <li>iOS 11</li>
-  <li>Accessories</li>
-</ul>
-```
-
-**contact.handlebars**
-```html
-<h1>Apple - Contact</h1>
-<form action="#">
-  <div>
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
-  </div>
-  <div>
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-  </div>
-  <div>
-    <label for="country">Country</label>
-    <select id="country" name="country">
-      <option value="argentina">Argentina</option>
-      <option value="australia">Australia</option>
-      <option value="canada">Canada</option>
-      <option value="usa">USA</option>
-    </select>
-  </div>
-  <div>
-    <label for="subject">Subject</label>
-    <textarea id="subject" name="subject" placeholder=""></textarea>
-  </div>
-  <input type="submit" value="Submit">
-</form>
-```
-
-* En nuestro archivo index.js agregamos soporte para archivos estáticos
-* De esta forma podemos crear la carpeta public y agregar las carpetas img, css y js
-* También agregamos los manejadores de urls para `'/products'` y `'/contact'`
-* Cada vista renderiza su propio template
-* En todos los caso utilizamos el layout general
-
-**index.js**
-```js
-app.use(express.static('public'))
-
-app.get('/products', function (req, res) {
-  res.render('products')
-})
-
-app.get('/contact', function (req, res) {
-  res.render('contact')
+app.listen(3000, function() {
+  console.log('Example app listening on port 3000!')
 })
 ```
 
-**public/js/script.js**
+**servidor/routes/api.js**
 ```js
-window.onload=function() {
-  console.log('Cargamos el sitio usando templates!!!')
-}
-```
+const express = require('express')
+const router = express.Router()
 
-* Finalmente agregamos el css
-
-**public/css/styles.css**
-```css
-body {
-  background: white;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-nav {
-  border-bottom: 1px solid black;
-  padding-left: 20px;
-  background: rgba(0,0,0,0.8);
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-nav ul li {
-  display: inline-block;
-}
-
-nav ul li:first-child {
-  margin-right: 10px;
-}
-
-nav ul li img {
-  vertical-align: middle;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: white;
-  display: block;
-}
-nav ul li a:hover{
-  text-decoration: underline;
-}
-
-section {
-  padding-left: 20px;
-}
-
-footer {
-  padding-left: 20px;
-  margin-top: 100px;
-  font-size: 12px;
-}
-
-form div {
-  margin-bottom: 10px;
-
-}
-
-form div label {
-  display: inline-block;
-  width: 100px;
-}
-
-form input {
-  width: 200px;
-  padding: 5px;
-}
-
-form select {
-  width: 215px;
-  height: 20px;
-}
-
-form textarea {
-  width: 200px;
-  padding: 5px;
-}
-
-form input[type=submit] {
-  width: 100px;
-  font-size: 12px;
-  line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: 0em;
-  font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-  min-width: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  background: linear-gradient(#42a1ec, #0070c9);
-  border-color: #07c;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  white-space: nowrap;
-}
-```
-
-* Al unir todos estos templates, carpetas y archivos tenemos nuestro servidor listo
-* Usando layouts y templates es más fácil crear y mantener sitios
-
-### Renderizar valores
-* Si bien tener layouts y secciones de html está bueno todavía no lo hace dinámico
-* Podemos utilizar las expresiones de Handlebars para introducir contenido dentro de los templates
-* Para renderizar un valor desde ECMAScript dentro del template de handlebars usamos `{{valor}}`
-
-**products.handlebars**
-```html
-<div>{{nombre}}</div>
-```
-**index.js**
-```js
-  res.render('products', { nombre: 'Mi Producto'})
-```
-
-* En este ejemplo vemos que utilizamos `{{nombredevariable}}` para imprimir un valor dentro del template
-* Desde Express podemos utilizar el método render para configuar el contenido y los valores
-* Como segundo parámetro render acepta un objeto donde las propiedades van a ser los nombres de variables que vamos a utilizar en el template
-* En este ejemplo el template renderiza el texto **Mi Producto** ya que le pedimos que remplace la variable `nombre` por el contenido de la propiedad `nombre` que le pasamos como segundo parámetro a `render`
-* En handlebars tenemos helpers que podemos utilizar dentro de nuestros templates:
-* Por ejemplo podemos utilizar `if` de la siguiente forma:
-
-```html
-<div>
-  {{#if user}}
-    <p>{{firstName}} {{lastName}}</p>
-  {{/if}}
-</div>
-```
-
-* También podemos iterar sobre colecciones de la siguiente manera:
-
-```html
-<ul>
-{{#each products}}
-  <li>{{this}}</li>
-{{/each}}
-</ul>
-```
-
-```js
-  res.render('products', { nombre: 'Mi Producto', products: ['tv', 'printer', 'ps4']})
-```
-
-* En este ejemplo iteramos la colección de productos y creamos una lista de forma dinámica
-* Existen varios helpers más y también podemos crear los nuestros si lo necesitamos
-* Este es un gran momento para ver la [documentación de Handlebars](http://handlebarsjs.com) para aprender más sobre este template engine
-
-### Templates parciales
-* Handlebars también soporta partials que son pequeñas partes de código que puedo utilizar en distintos lados de mi proyecto
-* En nuestro caso vamos a crear un partial del navbar que tenemos en el layout
-* Necesitamos crear una carpeta con el nombre `partials` y dentro vamos a crear el archivo `navbar.handlebars`
-
-```
-views
-└── partials
-    └── navbar.handlebars
-```
-
-* Extraemos el siguiente código del documento `layout` y lo ponemos como contenido del partial `navbar`
-
-**navbar.handlebars**
-```html
-<nav>
-  <ul>
-    <li>
-      <a href="/">
-        <img src="/img/logo.svg" alt="apple">
-      </a>
-    </li>
-    <li>
-      <a href="/products">Products</a>
-    </li>
-    <li>
-      <a href="/contact">Contact</a>
-    </li>
-  </ul>
-</nav>
-```
-
-**main.handlebars**
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Mi primer app con templates</title>
-  <link rel="stylesheet" href="/css/styles.css">
-  <script src="/js/script.js"></script>
-</head>
-<body>
-    {{> navbar}}
-    <section>
-      {{{body}}}
-    </section>
-    <footer>
-      <div>Copyright © 2017 Apple Inc. All rights reserved.</div>
-    </footer>
-</body>
-</html>
-```
-
-* En nuestro archivo de layout agregamos `{{> navbar}}` para agregar la botonera
-* Dado que el módulo de express-handlebars ya configura todo por nosotros podemos llamar al partial de esta manera
-* De esta forma podemos reutilizar esta parte del código y poner la botonera donde la necesitemos
-* Tener pequeños bloques de código en templates nos hace el trabajo más fácil
-* Podes leer más sobre partials en el [sitio de Handlebars](http://handlebarsjs.com/partials.html) y la documentación de [express-handlebars](https://github.com/ericf/express-handlebars)
-
-## Creando una botonera de forma dinámica
-* Por medio del uso del helper `#if` y un poco de js y css vamos a mostrar el link seleccionado
-* Para esto primero vamos a modificar el manejador de rutas de la siguiente manera
-
-```js
-app.get('/products', function (req, res) {
-  res.render('products', { products: products, selected: { products: true }})
-})
-
-app.get('/contact', function (req, res) {
-  res.render('contact', { selected: { contact: true } })
-})
-```
-
-* En este ejemplo le pasamos al template un objecto que tiene un atributo `selected`
-* Este objeto tiene propiedades como `products` o `contact` y le asignamos un valor boolean
-* Con este cambio configuramos los datos que necesitamos pasarle al template
-* Es el momento de modificar el layout para pasale el valor seleccionado al template parcial llamado `navbar`
-
-```html
-{{> navbar this}}
-```
-
-* `this` en handlebar es el contexto del template, en este caso es el objeto que le pasamos desde el manejador de la vista
-* En `this.selected` tenemos los valores de las secciones seleccionados
-* Ahora sólo resta modificar el template parcial de la botonera y utilizar un condicional para agregar o no una clase para el link seleccionado
-
-```html
-  <li>
-    <a href="/products" class="{{#if selected.products}}selected{{/if}}">Products</a>
-  </li>
-  <li>
-      <a href="/contact" class="{{#if selected.contact}}selected{{/if}}">Contact</a>
-  </li>
-```
-
-**styles**
-```css
-nav ul li a.selected {
-  color: gray;
-}
-```
-
-* Dentro del parcial podemos acceder a la variable `selected` por su nombre
-* Con `selected.contact o selected.products` obtenemos los valores establecidos en el manejador de ruta
-* Al compilar el template evalúa si `selected.contact` o `selected.products` es verdadero para agregar la clase `selected`
-* De esta forma hacemos que nuestro partial sea dinámico
-* Existen otras formas de hacer esto, por ejemplo podemos utilizar el if para imprimir un elemento con la clase según la condicion
-
-```html
-  <li>
-    {{#if selected.products}}
-      <a href="/products" class="selected">Products</a>
-    {{else}}
-      <a href="/products">Products</a>
-    {{/if}}
-  </li>
-  <li>
-    {{#if selected.contact}}
-      <a href="/contact" class="selected">Contact</a>
-    {{else}}
-      <a href="/contact">Contact</a>
-    {{/if}}
-  </li>
-```
-
-* También se puede dar el caso donde no queremos que el usuario vuelva a hacer click en la sección seleccionada
-
-```html
-  <li>
-    {{#if selected.products}}
-      <span>Products</span>
-    {{else}}
-      <a href="/products">Products</span>
-    {{/if}}
-  </li>
-  <li>
-    {{#if selected.contact}}
-      <span>Contact</span>
-    {{else}}
-      <a href="/contact">Contact</a>
-    {{/if}}
-  </li>
-```
-
-## Obteniendo parametros
-* Express nos permite obtener los parámetros enviados en el request de diferentes maneras
-* Una de las formas más comúnes de pasar parámetros es utilizando la url
-* Por ejemplo si queremos ver la descripción de un producto podemos utilizar la url `/productos/:id`
-* Al establecer estar ruta estamos diciendo que si llamamos al server con una url tipo `/productos/10` obtenemos el parámetro id con el valor 10
-* Vamos a crear un a pagina de detalle según el elemento del array productos
-
-**index.js**
-```js
-// Tenemos configurado nuestro array de productos y secciones
-const products = [
-  { section: 'MacBook', items: ['MacBook', 'MacBook Air', 'MacBook Pro', 'iMac', 'iMac Pro', 'Mac Pro', 'Mac mini', 'Accessories', 'High Sierra'] },
-  { section: 'iPad', items: ['iPad Pro', 'iPad', 'iPad mini 4', 'iOS 11', 'Accessories',] },
-  { section: 'iPhone', items: ['iPhone X', 'iPhone 8', 'iPhone 7', 'iPhone 6s', 'iPhone SE', 'iOS 11', 'Accessories'] }
+// creo un array, donde voy a ir almacenando los emails
+// de esta forma la informacion no esta escrita en la web, sino que la guardamos en un servidor, en un lugar central
+// y cada vez que entremos a nuestra app web, vamos a poder consultar esa info mediante la API
+const movies = [
+  { id: 1, title: 'Batman Begins', summary: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.', year: 2005 },
+  { id: 2, title: 'The Dark Knight', summary: 'When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham. The Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice.', year: 2008 },
+  { id: 3, title: 'The Dark Knight Rises', summary: 'Eight years after the Joker\'s reign of anarchy, Batman, with the help of the enigmatic Catwoman, is forced from his exile to save Gotham City, now on the edge of total annihilation, from the brutal guerrilla terrorist Bane.', year: 2012 }
 ]
 
+// creo una ruta que devuelve el array de emails
+router.get('/api/movies', function (req, res) {
+  res.json(movies)
+})
+
+module.exports = router
+```
+
+* Creamos una nueva ruta que devuelve un listado de peliculas en formato JSON
+* Ahora vamos a poder llamar desde el cliente usando AJAX al servidor y pedirle que nos mande el listado de peliculas
+* Lo vamos a mostrar en pantalla recorriendo la respuesta y armando una lista
+* Primero creamos un contenedor en el HTML de la página de productos para poder insertar los nuevos valores que traemos con un llamado de AJAX
+* Aclaración del código a continuación: **Todo este código, es del lado del cliente**
+
+**cliente/index.html**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Peliculas</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+</head>
+<body>
+  <h2>Peliculas</h2>
+
+  <a href="nuevo.html">Agregar nueva película</a>
+
+  <div id="movies">
+    <!-- Asi deberia quedar cada div contenedor de una pelicula
+      <div class="movie">
+        <span class="title">Tempor diam.</span>
+        <span class="year">1900</span>
+
+        <button>Ver detalle</button>
+        <button>Editar</button>
+        <button>Eliminar</button>
+      </div>
+    -->
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
+```
+
+* Luego agregamos el siguiente código para hacer el llamado por AJAX, obtener la respuesta y crear de forma dinámica los items de productos
+
+**cliente/index.js**
+```js
+$.ajax('http://localhost:3000/api/movies')
+  .done(function (respuesta) {
+    // el parametro respuesta es lo que nos contesta el servidor (en este caso el array de las peliculas)
+    respuesta.forEach(function (pelicula) {
+      $('#peliculas').append(`
+        <div class="movie">
+          <span class="title">${pelicula.title}</span>
+          <span class="year">${pelicula.year}</span>
+
+          <button>Ver detalle</button>
+          <button>Editar</button>
+          <button>Eliminar</button>
+        </div>
+      `)
+    })
+  })
+```
+
+* De esta forma estamos vinculando archivos del cliente y el servidor
+* En cuanto se carga nuestra web, estamos pidiendo a nuestra API que nos devuelva las peliculas que están guardadas en el servidor
+* Entonces, no importa si accedemos desde una computadora, un celular, o cualquier otro dispositvo: como siempre estamos usando la misma API, vamos a obtener los mismo datos.
+
+### Obteniendo parametros
+* Express nos permite obtener los parámetros enviados en el request de diferentes maneras
+* Una de las formas más comúnes de pasar parámetros es utilizando la url
+* Por ejemplo si queremos ver la descripción de una pelicula podemos utilizar la url `/api/movies/:id`
+* Al establecer estar ruta estamos diciendo que si llamamos al server con una url tipo `/api/movies/3` obtenemos el parámetro id con el valor 3
+* Vamos a crear una ruta que nos devuelva una película específica del array `movies`
+
+**servidor/routes/api.js**
+```js
 // Configuramos la url para que espere un id
-app.get('/products/:id', function (req, res) {
+// la agregamos antes del module.exports
+app.get('/api/movies/:id', function (req, res) {
   const id = req.params.id
 
-  // Usamos el id como posición del elemento que estamos buscando
-  const product = products[id]
+  // Usamos el id para buscar en el array el objeto que tenga ese mismo id
+  const movie = movies.find(function (pelicula) {
+    return pelicula.id == id
+  })
 
-  // agregamos un dato product a nuestro llamado de render para que le llegue este valor al template
-  res.render('product', { product: product})
+  // si no encontré ninguna pelicula, le devolvemos un estado 404 not found y un mensaje
+  if (!movie) {
+    return res.status(404).send(`La pelicula con id ${id} no existe.`);
+  }
+
+  // respondemos a quien nos pidio la pelicula con el objeto json que encontramos
+  res.json(movie)
 })
 ```
 
-* Ahora que tenemos configurado la ruta podemos crear el nuevo template para mostrar el detalle del producto
-* Creamos el archivo `product.handlebars` dentro de views
+* Si navegamos a la ruta: `http://localhost:3000/api/movies/1` ya podemos ver en el browser el JSON del objeto específico
+  * Podemos probar las otras url cambiando 1 por 2, 3 y ver que pasa si pasamos un parámetro donde no tenemos valores en el array (por ejemplo 15)
 
-```
-.
-├── index.js
-└── views
-    ├── home.handlebars
-    ├── contact.handlebars
-    ├── products.handlebars
-    ├── product.handlebars
-    └── layouts
-        └── main.handlebars
-```
+* Vamos a crear una página para ver el detalle de una película
 
-* Agregamos el siguiente código:
-
-**product.handlebars**
+**cliente/detalle.html**
 ```html
-<h1>{{product.section}}</h1>
-<ul>
-{{#each product.items}}
-  <li>{{this}}</li>
-{{/each}}
-</ul>
-<a href="/products">Ir a Products</a>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Peliculas</title>
+</head>
+<body>
+  <h2>Pelicula</h2>
+
+  <div id="movie">
+    <h3 class="title"><!-- aca vamos a agregar el titulo de la pelicula con js --></h3>
+    <small class="year"><!-- aca vamos a agregar el año de la pelicula con js --></small>
+
+    <p class="summary"><!-- aca vamos a agregar el detalle de la pelicula con js --></p>
+  </div>
+
+  <a href="index.html">Volver</a>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="detalle.js"></script>
+</body>
+</html>
 ```
 
-* En este template obtenemos el nombre de la sección seleccionada de producto
-* Mostramos todos los elementos de esa sección
-* Si navegamos a la ruta: `http://localhost:3000/products/0` ya podemos ver la sección del primer elemento de la colección de productos
-  * Podemos probar las otras url cambiando 0 por 1, 2 y ver que pasa si pasamos un parámetro donde no tenemos valores en el array
-* Modificamos el template de `products.handebars` para crear un link que nos lleve al detalle de la sección
+**cliente/detalle.html**
+```js
+// obtenemos el id de la pelicula que queremos mostrar
+const urlParams = new URLSearchParams(window.location.search)
+const id = urlParams.get('id')
 
-**products.handlebars**
+// con ajax, vamos a pedirle a nuestra api que nos devuelva la info de una pelicula especifica, pasandole el id como parametro de la url
+// una vez que obtuvimos el resultado de ese llamado a la API, asignamos los datos a los elementos del html
+// en este caso usamos la ruta de la API que tenía el parámetro /api/movies/:id
+$.ajax(`http://localhost:3000/api/movies/${id}`)
+  .done(function (data) {
+    console.log(data);
+
+    $('#movie .title').text(data.title);
+    $('#movie .summary').text(data.summary);
+    $('#movie .year').text(data.year);
+  });
+```
+
+* Cuando vamos a navegar desde la página del listado de películas, a la página con el detalle de la película, necesitamos de alguna forma indicarle a esta nueva página que película queremos mostrar.
+* Esto lo podemos hacer mediante los `query params`
+* Para esto, primero vamos a agregar la navegación en el botón 'Ver detalle' del index
+
+**cliente/index.js**
+```js
+$.ajax('http://localhost:3000/api/movies')
+  .done(function (respuesta) {
+    // el parametro respuesta es lo que nos contesta el servidor (en este caso el array de las peliculas)
+    respuesta.forEach(function (pelicula) {
+      $('#movies').append(`
+        <div class="movie">
+          <span class="title">${pelicula.title}</span>
+          <span class="year">${pelicula.year}</span>
+
+          <button onclick="verDetalle(${pelicula.id})">Ver detalle</button>
+          <button>Editar</button>
+          <button>Eliminar</button>
+        </div>
+      `)
+    })
+  })
+
+
+// agrego el on click al botton 'ver detalle' para que navegue a la otra pagina
+function verDetalle (id) {
+  window.location.href = `detalle.html?id=${id}`;
+}
+```
+* Agregamos el onclick al button `<button onclick="verDetalle(${pelicula.id})">Ver detalle</button>`
+* Agregamos la función `verDetalle(id)` al final, que recibe como parámetro el ID de la película
+* Dentro de la función, solo hacemos un `location.href` para navegar a la nueva página, pero esta vez le agregamos el query param `id` con el ID de la película. Por ejemplo: `?id=1`. Los query params van al final de la URL, después del signo de pregunta `?`
+* Este query param es el que obtenemos en `detalle.js` y usamos para ir a buscar los datos de la película que queremos ver.
+
+### Agregar una nueva pelicula - Submit de form por post - Express body y body-parse
+* Ahora, vamos a agregar la posibilidad de crear nuevas peliculas
+* Para eso vamos a crear una nueva página con un formulario
+
+**cliente/nuevo.html**
 ```html
-<h2>
-  <a href="/products/{{@index}}">{{this.section}}</a>
-</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nuev Pelicula</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+</head>
+<body>
+  <h2>Nueva Pelicula</h2>
+
+  <form id="new-movie">
+    <label for="title">Titulo</label>
+    <input type="text" id="title" name="title">
+
+    <label for="summary">Descripción</label>
+    <textarea id="summary" name="summary"></textarea>
+
+    <label for="year">Año</label>
+    <input type="text" id="year" name="year">
+
+    <!-- importante el type="button" -->
+    <button type="button">Guardar</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="nuevo.js"></script>
+</body>
+</html>
 ```
 
-* Modificamos el título h2 para que tenga un hipervinculo
-* Dado que cada hipervinculo nos tiene que llevar a un id distinto utilizamos el helper `@index` de handlebars
-* Este helper nos retorna el índice del iterador, es decir que de esta forma obtenemos la posicion de cada elemento
-* Si vemos el listado de productos ahora vemos que tenemos una forma de seleccionar cada sección y ver su detalle
-
-## Submit de form por get - Express query
-* El objeto Request de Express tiene una propiedad llamada `query` que nos permite obtener los valores pasados por `querystring`
-* Si el querystring está vacío obtenemos un objeto sin propiedades
-
+**cliente/nuevo.js**
 ```js
-// ruta: ?nombre=pepe&apellido=gutierrez
+$('#new-movie').click(function () {
+  // obtenemos todos los datos de los inputs en el html
+  const title = $('input[name="title"]').val()
+  const summary = $('textarea[name="summary"]').val()
+  const year = $('input[name="year"]').val()
 
-app.get('/contacto', function(req, res){
-  const nombre = req.query.nombre
-  const apellido = req.query.apellido
-  res.send(`${nombre} ${apellido}`)
-});
-```
+  // creamos el objeto que estamos creando y le vamos a mandar al servidor para que guarde
+  const newMovie = {
+    title: title,
+    summary: summary,
+    year: year
+  }
 
-* En este ejemplo vemos que utilizando la propiedad `query` del objeto Request podemos obtener los valores pasados por query string
-* Siguiendo nuestro ejemplo vamos a agregar esta funcionalidad a nuestro formulario de contacto
-* En index.js agregamos una nueva ruta para manejar el request por get a la ruta `/contact/submitporget`
-* Dado que el formulario manda los valores por GET vamos a utilizar `query` para obtenerlo
-* Nos tenemos que acordar que del lado del servidor tenemos que esperar los datos de la forma que nos los mandan
-
-**index.js**
-```js
-app.get('/contact/submitporget', function (req, res) {
-  console.log(req.query) // vemos en la consola del server el objeto query con todos los datos
-
-  const firstname = req.query.firstname
-  const lastname = req.query.lastname
-  const country = req.query.country
-  const subject = req.query.subject
-
-  res.send(`
-    Nombre: ${firstname}
-    Apellido: ${lastname}
-    País: ${country}
-    Mensaje: ${subject}
-  `)
+  // finalmente, con ajax, le enviamos un HTTP POST al servidor para que guarde el objeto
+  // y le pasamos como data el nuevo objeto
+  $.ajax('http://localhost:3000/api/movies', {
+    method: 'post',
+    data: newMovie
+  })
+    .done(function () {
+      // si salió todo bien, volvemos a la pantalla de inicio
+      window.location.href = 'index.html'
+    })
 })
 ```
 
-**contact.handlebars**
-```html
-<form action="/contact/submitporget">
-```
-
-* Al configurar esta nueva ruta y cambiar el action del formulario podemos enviar datos del cliente al servidor usando el método GET
-
-## Submit de form por post - Express body y body-parse
+* En el onclick, después de obtener los datos de los inputs, le pedimos al servidor que guarde ese objeto nuevo
+* Entonces tenemos que crear la ruta POST en el servidor
 * Para poder acceder a los valores pasados por POST tenemos que instalar un nuevo módulo llamado `body-parser`
 * Este módulo funciona como middleware y agrega los valores pasados por POST a la propiedad `body` del objeto Request
 * Instalamos `body-parser` de la siguiente manera
@@ -1341,6 +1012,7 @@ npm install body-parser --save
 ```
 
 * Luego de instalarlo tenemos que configurarlo en nuestro proyecto
+* Podemos agregar antes de la linea `app.use('/', apiRouter)`
 
 ```js
 const bodyParser = require('body-parser')
@@ -1351,123 +1023,27 @@ app.use(bodyParser.json())
 * Primero requerimos el módulo y luego configuramos el middleware utilizando el método `use` de Express
 * Agregamos `urlencoded` y `json` para poder configurar la forma en que body-parser parsea los datos
 * Al configurar este módulo obtenemos que en cada request que llegue por POST podamos acceder a los datos utilizando la propiedad `body` del objeto Request
-
-```js
-// ruta: /contacto
-
-app.get('/contacto', function(req, res){
-  const nombre = req.body.nombre
-  const apellido = req.body.apellido
-  res.send(`${nombre} ${apellido}`)
-});
-```
-
 * Dado que nos mandan los valores por POST podemos obtenerlos usando `body`
-* Vamos a configurar body-parser en nuestro proyecto y mandar los valores del formulario por POST
-* Primero vamos a cambiar el `action` y `method` de nuestro formulario
-
-**contact.handlebars**
-```html
-<form action="/contact/submitporpost" method="post">
-```
-
 * Ahora necesitamos manejar el request usando una nueva ruta por POST
 
+**servidor/routes/api.js**
 ```js
-app.post('/contact/submitporpost', function (req, res) {
-  const firstname = req.body.firstname
-  const lastname = req.body.lastname
-  const country = req.body.country
-  const subject = req.body.subject
-  res.send(`
-    Nombre: ${firstname}
-    Apellido: ${lastname}
-    País: ${country}
-    Mensaje: ${subject}
-  `)
+router.post('/api/movies', function(req, res){
+  const title = req.body.title
+  const summary = req.body.summary
+  const year = req.body.year
+
+  const movieToPush = {
+    title: title,
+    summary: summary,
+    year: year
+  }
+
+  movies.push(movieToPush)
+
+  res.send(movies)
 })
 ```
 
-* Al mandar los parámetros por GET los obteníamos usando la propiedad `query`
-* Ahora al mandar los valores por POST los obtenemos utilizando `body`
-* De esta forma vemos que los distintos métodos pasan los valores por distintos lados
+* Al mandar los valores por POST los obtenemos utilizando `body`
 * Pueden leer más sobre [body-parser en su sitio](https://www.npmjs.com/package/body-parser)
-
-## Crear una API rest
-* Ahora que ya sabemos enviar y recibir datos utilizando GET y POST vamos a crear un llamado de API
-* Vamos a crear una ruta que al llamarla por GET retorne todos los productos que tenemos
-
-**index.js**
-```js
-const productosApi = [
-  'MacBook', 'MacBook Air', 'MacBook Pro', 'iMac', 'iMac Pro',
-  'Mac Pro', 'Mac mini', 'Accessories', 'High Sierra',
-  'iPad Pro', 'iPad', 'iPad mini 4', 'iOS 11', 'Accessories',
-  'iPhone X', 'iPhone 8', 'iPhone 7', 'iPhone 6s', 'iPhone SE'
-]
-
-app.get('/api/products', function (req, res) {
-  const response = { products: productosApi}
-  res.json(response)
-})
-```
-
-* Creamos una nueva ruta que devuelve un listado de productos en formato JSON
-* Ahora vamos a llamar desde el cliente usando AJAX al servidor y pedirle que nos mande el listado de productos
-* Lo vamos a mostrar en pantalla recorriendo la respuesta y armando una lista
-* Primero creamos un contenedor en el HTML de la página de productos para poder insertar los nuevos valores que traemos con un llamado de AJAX
-
-**products.handlebars**
-```html
-<h2>Productos Por AJAX</h2>
-<div id="productos">
-  <img src="/img/loading.gif" alt="loading" width="30" />
-</div>
-```
-
-* En la carpeta `public/img/` tenemos que copiar la [siguiente imagen(loading.gif)](../assets/node/loading.gif)
-* Luego agregamos el siguiente código para hacer el llamado por AJAX, obtener la respuesta y crear de forma dinámica los items de productos
-
-**public/script.js**
-```js
-window.onload=function() {
- const url = 'http://localhost:3000/api/products'
- const xmlhttp = new XMLHttpRequest();
-
- const ocultarLoader = () => {
-   const loading = document.querySelector('#productos img')
-   loading.style.display = 'none'
- }
-
- const crearListaDeProductos = (productos) => {
-   const lista = document.createElement('ol')
-   const contenedor = document.querySelector('#productos')
-
-   productos.forEach((producto) => {
-     const elemento = document.createElement('li')
-     elemento.textContent = producto
-     lista.appendChild(elemento)
-   })
-
-   contenedor.appendChild(lista)
- }
-
- xmlhttp.onreadystatechange = function() {
-     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-       const respuesta = JSON.parse(xmlhttp.responseText);
-       ocultarLoader()
-       crearListaDeProductos(respuesta.products)
-     }
- };
-
- xmlhttp.open("GET", url, true);
- xmlhttp.send();
-}
-```
-
-* De esta forma estamos vinculando archivos del cliente y el servidor
-* En la sección de base de datos agregamos los llamados por post para enviar datos
-* Para subir archivos se puede configurar otro módulo conocido llamado [multer](https://www.npmjs.com/package/multer)
-* También está bueno aprender [otros módulos que se llevan bien con Express](https://expressjs.com/en/resources/middleware.html)
-
-* Si quieren aprender más sobre node puede mirar los [cursos de NodeSchool](https://nodeschool.io/)
