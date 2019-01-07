@@ -1,13 +1,13 @@
 const filas = 8;
-const columnas = 12;
+const columnas = 8;
 
 // \n
 let cadenaDeTexto = "";
 
-for (let j = 0; j < filas; j++) {
-  for (let i = 0; i < columnas; i++) {
-    // si es par
-    if ((j % 2 === 0 && i % 2 === 0) || (j % 2 !== 0 && i % 2 !== 0)  ) {
+for (let fila = 0; fila < filas; fila++) {
+  for (let columna = 0; columna < columnas; columna++) {
+    // si fila y columna son pares, o fila y columna son impares => agrego un espacio
+    if ((fila % 2 === 0 && columna % 2 === 0) || (fila % 2 !== 0 && columna % 2 !== 0)  ) {
       cadenaDeTexto += " ";
     } else {
       cadenaDeTexto += "#";
@@ -15,4 +15,5 @@ for (let j = 0; j < filas; j++) {
   }
   cadenaDeTexto += "\n";
 }
+
 console.log(cadenaDeTexto);
