@@ -1,6 +1,49 @@
 # Ejercicios
 
-1. Crear una aplicación de React que permita calcular tu peso en otros planetas.
+1. Crear una aplicación de React que muestre por pantalla el mensaje `¡Hola, {nombre}!`, donde nombre sea una variable de javascript.
+
+2. Siguiendo el ejercicio del punto 1, que la aplicación muestre por pantalla el mensaje `¡Hola, {this.state.nombre}!`, donde nombre sea una variable guardada en el `state` del componente `App`.
+
+3. Crear una aplicación con React, con un nuevo componente `HolaMundo`, en el que mostremos el mensaje `¡Hola mundo!`. Esta aplicación va a tener dos componentes: `App` y `HolaMundo`.
+  ![Componentes ejercicio 3](https://file-zbdbbpuzqh.now.sh/)
+
+4. Tomando como punto de partida el ejercicio del punto 3, ahora queremos que en el mensaje que mostramos dentro del componente `HolaMundo`, sea dinámico. Para eso, vamos a cambiar el mensaje por `¡Hola, {this.state.nombre}!`. Agregar el código restante para que el texto final que vemos en pantalla sea '¡Hola Ada!'
+
+5. Si el mensaje dentro del componente `HolaMundo` del ejercicio anterior, fuese `¡Hola, {this.props.nombre}!`, ¿qué debería modificar en `App` para que el texto final en la pantalla sea '¡Hola, Grace!'?
+
+6. Crear una nueva aplicación de React, con un componente `Saludador`. En el mismo, queremos visualizar un botón con el texto 'Saludar' y al hacer click mostrar un alert con el mensaje '¡Hola mundo!'. El código de App solo debería importar el componente `Saludador`.
+
+    En App.js:
+    ```
+    render () {
+      return (
+        <Saludador />
+      )
+    }
+    ```
+7. Siguiendo el código del ejercicio **6**, en el componente `Saludador` queremos agregar un `<input>` en el cual permitimos a la persona ingresar su nombre. Al hacer click en el botón saludar (ya creado en el ejercicio anterior) tenemos que mostrar un alert con el texto `¡Hola, {this.state.nombre}!`. La variable nombre que estamos mostrando, debe ser la que ingresa la persona en el input.
+
+8. Crear una aplicación que tenga solamente un botón. El texto del botón, debe mostrar el valor de una propiedad del state llamada `counter`. Cada vez que hacemos click en ese botón, debemos incrementar en 1 esa variable.
+  ![Ejemplo contador clicks](http://g.recordit.co/SprjBIleW1.gif)
+
+9. Crear una aplicación que tenga dos botones y un span. El texto del span, debe mostrar el valor de una propiedad del state llamada `counter`. Cada botón va a incrementar o decrementar la variable `counter`.
+  ![Ejemplo contador + -](http://g.recordit.co/nFjLUwDvZw.gif)
+
+10. Escribir una app con React para convertir temperaturas de grados centígrados a fahrenheit y viceversa.
+
+    Fahrenheit y centigrados son dos escalas para medir la temperatura.
+
+    En la escala Fahrenheit, el agua se congela a los 32 grados y hierve a las 212.
+
+    En la escala Centígrados (también conocida como Celsius), el agua congela a 0 grados y hierve a las 100.
+
+    La fórmula para convertir de Fahrenheit a Celsius: `C = (5/9) * (F - 32)`
+
+    La fórmula para convertir de Celsius a Fahrenheit: `F = (1.8 * C) + 32`
+
+    ![Ejemplo app celsius a fahrenheit](http://g.recordit.co/ckB8hxfSC2.gif)
+
+11. Crear una aplicación de React que permita calcular tu peso en otros planetas.
   ![App peso en otros planetas](http://g.recordit.co/mSOHY8ImCh.gif)
 
     * La misma debe tener un formulario con dos campos: peso y planeta.
