@@ -29,7 +29,20 @@
 9. Crear una aplicación que tenga dos botones y un span. El texto del span, debe mostrar el valor de una propiedad del state llamada `counter`. Cada botón va a incrementar o decrementar la variable `counter`.
   ![Ejemplo contador + -](http://g.recordit.co/nFjLUwDvZw.gif)
 
-10. Escribir una app con React para convertir temperaturas de grados centígrados a fahrenheit y viceversa.
+10. Crear un componente `Modal`, el cual mostrará una ventana modal con el mensaje `¡Hola mundo, desde un modal!`. En el componente principal `App` vamos a llamar a nuestro componente `Modal` y un elemento `<button>` con el que, al hacer click, mostraremos el modal.
+    En App.js:
+    ```
+    render () {
+      return (
+        <button onClick={}>Abrir modal</button>
+        <Modal message show={} hide={} />
+      )
+    }
+    ```
+
+    ![Ejemplo modal](http://g.recordit.co/qRlW09Vzfx.gif)
+
+11. Escribir una app con React para convertir temperaturas de grados centígrados a fahrenheit y viceversa.
 
     Fahrenheit y centigrados son dos escalas para medir la temperatura.
 
