@@ -41,7 +41,7 @@ Las 3 pantallas que vamos a tener son las siguientes:
 
 * En el servidor, construir los siguientes endpoints (rutas):
   * /api/items?q=**:query**
-    * Debe hacer un request al siguiente endpoint de la API de Mercado Libre: https://api.mercadolibre.com/sites/MLA/search?q=**:query**
+    * Debe hacer un request al siguiente endpoint de la API de Mercado Libre: [https://api.mercadolibre.com/sites/MLA/search?q=**:query**](https://api.mercadolibre.com/sites/MLA/search?q=:query)
 
       Y retornar los datos con el siguiente formato
       ```js
@@ -58,7 +58,8 @@ Las 3 pantallas que vamos a tener son las siguientes:
             },
             picture: String,
             condition: String,
-            free_shipping: Boolean
+            free_shipping: Boolean,
+            location: String
           },
           { ... },
           { ... },
@@ -67,15 +68,19 @@ Las 3 pantallas que vamos a tener son las siguientes:
       }
       ```
 
+      ![Flujo de la api](https://file-vaajnrhura.now.sh/)
+
   * /api/items/**:id**
     * Debe hacer un requeste a los siguientes endpoints de la API de Mercado Libre:
 
-      https://api.mercadolibre.com/items/**:id**
-      https://api.mercadolibre.com/items/**:id**/description
+      [https://api.mercadolibre.com/items/**:id**](https://api.mercadolibre.com/items/:id)
+
+      [https://api.mercadolibre.com/items/**:id**/description](https://api.mercadolibre.com/items/:id/description)
 
       Y retornar los datos con el siguiente formato
       ```js
       {
+        categories: [String, String, String, ...],
         item: {
           id: String,
           title: String,
@@ -93,6 +98,8 @@ Las 3 pantallas que vamos a tener son las siguientes:
       }
       ```
 
+      ![Flujo de la api](https://file-bnzgvjulhc.now.sh/)
+
 ## Descripción
 
 * En la vista de caja de búsqueda, debería poder ingresar el producto a buscar y, al enviar el formulario, navegar a la vista de Resultados de búsqueda, visualizando **solo 4** productos. Luego, al hacer clic sobre uno de ellos, debería navegar a la vista de Detalle de Producto.
@@ -103,3 +110,13 @@ Las 3 pantallas que vamos a tener son las siguientes:
 * No es necesario implementar paginación ni filtro por categorías.
 * El breadcrumb que se muestra en el listado de búsqueda debe armarse basado en la categoría que más resultados obtuvo (dicha información está disponible en la API de Search).
 * El breadcrumb de la página de detalle del ítem debe armarse con la categoría propia del ítem.
+
+## Estructura
+  ```bash
+  tp-final/
+      cliente/
+          [App creada con create-react-app]
+
+      servidor/
+          [App creada con express generator]
+  ```
