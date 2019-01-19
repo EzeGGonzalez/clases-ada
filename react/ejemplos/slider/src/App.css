@@ -1,0 +1,30 @@
+html, body, #root, .carousel {
+	height:100%;
+	margin: 0;
+	width: 100%;
+}
+
+.image-slide {
+	height: 100%;
+	width: 100%;
+	transition: background-image .3s ease-in-out;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.slide-arrow {
+	color: pink;
+	cursor: pointer;
+	font-size: 2rem;
+	position: fixed;
+	top: 50%;
+}
+
+.slide-arrow.right {
+	right: 1rem;
+}
+
+.slide-arrow.left {
+	left: 1rem;
+}
