@@ -9,10 +9,18 @@ $.ajax('/api/books?search=' + elSearch)
     // itero por cada libro que viene en data
     for (var i = 0; i < data.length; i++) {
       $('#libros').append(`
-        <li>
+        <li id="${data[i].isbn}">
           <img src="${data[i].cover}" />
           <p>${data[i].title}</p>
+          <small>${data[i].subtitle}</small>
+          <p>${data[i].authors}</p>
         </li>
       `)
     }
   })
+
+$(document).on('click', 'li', function () {
+  const isbn = $(this).attr('id');
+  location.href = '/detalle?isbn=' + isbn;
+  // http://localhost:3000/detalle?isbn=9788495733184
+})
