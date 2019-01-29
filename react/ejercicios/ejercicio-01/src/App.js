@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Listado from './components/Listado';
+import Detalle from './components/Detalle';
+import Nuevo from './components/Nuevo';
+import { BrowserRouter, Route } from 'react-router-dom';
+
 import './App.css';
 
 class App extends Component {
@@ -10,7 +14,13 @@ class App extends Component {
     return (
       <div>
         {/* en el mensaje, muestro la constante que creamos mas arriba */}
-        <h1>¡Hola, {nombre}!</h1>
+        <BrowserRouter>
+          <div>
+            <Route exact path="/listado" component={Listado} />
+            <Route exact path="/nuevo" component={Nuevo} />
+            <Route exact path="/detalle/:isbn" component={Detalle} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }

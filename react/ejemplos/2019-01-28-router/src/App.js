@@ -1,5 +1,6 @@
 // el import es una funcion nativa de JS que me permite importa modulos o librerias
 import React, { Component } from 'react';
+// en este punto importamos BrowserRouter y Route
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import Home from './Home';
 import AboutUs from './AboutUs';
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <div>
         <p>probando el router</p>
+
         <BrowserRouter>
           <div>
             <ul>
