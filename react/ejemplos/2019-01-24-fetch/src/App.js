@@ -27,8 +27,7 @@ class App extends Component {
     //   })
   }
 
-  // hooks
-  componentDidMount () {
+  traerCosas () {
     axios.get('https://api.github.com/users/ezeggonzalez/repos?sort=updated&client_id=998f64b60aadaf8a3567&client_secret=196f59566e14e65037b21fe501d1e1e87ffa6de6')
       .then((result) => {
         this.setState({
@@ -38,23 +37,29 @@ class App extends Component {
       })
   }
 
-  render() {
-    let contenido = ''
+  // hooks
+  // https://reactjs.org/docs/state-and-lifecycle.html
+  // el mejor lugar para hacer un request a alguna API, es en el momento en que el componente se carga / monta (cuando ese componente se va a agregar al DOM)
+  componentDidMount () {
+    this.traerCosas();
+  }
+  // componentDidUpdate () {
+  //   this.traerCosas();
+  // }
 
+  render() {
     if (this.state.loading) {
-      contenido = <p>cargando...</p>
-    } else {
-      contenido = this.state.repos.map((r, i) => (
-        <li key={i}>
-          {r.name}
-          <a href={r.url}>ver</a>
-        </li>
-      ))
+      return <p>cargando...</p>
     }
 
     return (
       <div>
-        { contenido }
+        { this.state.repos.map((r, i) => (
+        <li key={i}>
+          {r.name}
+          <a href={r.url}>ver</a>
+        </li>
+      )) }
       </div>
     )
   }
